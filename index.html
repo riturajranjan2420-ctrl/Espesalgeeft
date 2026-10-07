@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ✨</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#090914;
+    color:white;
+    font-family:Poppins,sans-serif;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(255,80,160,.22),transparent 30%),
+        radial-gradient(circle at 85% 25%,rgba(80,150,255,.22),transparent 32%),
+        radial-gradient(circle at 50% 90%,rgba(170,80,255,.20),transparent 35%),
+        #090914;
+}
+
+.blob{
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.45;
+    animation:floatBlob 9s ease-in-out infinite alternate;
+}
+
+.b1{
+    background:#ff4f9a;
+    top:-70px;
+    left:-60px;
+}
+
+.b2{
+    background:#596cff;
+    right:-80px;
+    top:25%;
+    animation-delay:2s;
+}
+
+.b3{
+    background:#ff9f43;
+    bottom:-100px;
+    left:25%;
+    animation-delay:4s;
+}
+
+@keyframes floatBlob{
+    from{transform:translate(0,0) scale(1);}
+    to{transform:translate(45px,-35px) scale(1.2);}
+}
+
+
+/* ---------- FLOATING PARTICLES ---------- */
+
+.particles span{
+    position:absolute;
+    display:block;
+    animation:rise linear infinite;
+    opacity:0;
+}
+
+.star{
+    width:5px;
+    height:5px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 12px white;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+}
+
+.s1{background:#ff72b6;}
+.s2{background:#72b8ff;}
+.s3{background:#ffd166;}
+.s4{background:#b78cff;}
+
+@keyframes rise{
+    0%{
+        transform:translateY(110vh) rotate(0deg);
+        opacity:0;
+    }
+    15%{opacity:.9;}
+    85%{opacity:.7;}
+    100%{
+        transform:translateY(-15vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+
+/* ---------- MAIN ---------- */
+
+.screen{
+    position:relative;
+    width:100%;
+    height:100vh;
+    z-index:5;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:35px;
+    opacity:0;
+    transform:scale(.96);
+    pointer-events:none;
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.slide.active{
+    opacity:1;
+    transform:scale(1);
+    pointer-events:auto;
+}
+
+.content{
+    width:min(720px,100%);
+}
+
+.eyebrow{
+    font-size:11px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#bfc2d9;
+    margin-bottom:22px;
+}
+
+h1{
+    font-family:"DM Serif Display",serif;
+    font-size:clamp(48px,12vw,88px);
+    line-height:1;
+    background:linear-gradient(
+        110deg,
+        #ffffff,
+        #ffb6db,
+        #aeb8ff,
+        #ffffff
+    );
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:gradient 5s ease infinite;
+}
+
+h2{
+    font-family:"DM Serif Display",serif;
+    font-size:clamp(35px,8vw,62px);
+    line-height:1.1;
+    margin-bottom:24px;
+}
+
+@keyframes gradient{
+    0%{background-position:0%;}
+    50%{background-position:100%;}
+    100%{background-position:0%;}
+}
+
+.text{
+    font-size:clamp(16px,4vw,21px);
+    line-height:1.9;
+    color:#d7d8e3;
+}
+
+.pink{color:#ff9dca;}
+.blue{color:#9fb5ff;}
+.yellow{color:#ffd77a;}
+
+.quote{
+    margin-top:25px;
+    font-family:"DM Serif Display",serif;
+    font-size:clamp(23px,5vw,35px);
+    line-height:1.45;
+    color:#fff;
+}
+
+.line{
+    width:45px;
+    height:2px;
+    margin:28px auto;
+    background:linear-gradient(90deg,#ff75b7,#8d9cff);
+}
+
+
+/* ---------- START SCREEN ---------- */
+
+.startScreen{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    background:
+        radial-gradient(circle at 50% 40%,rgba(130,100,255,.18),transparent 35%),
+        #090914;
+    transition:opacity .8s ease, visibility .8s ease;
+}
+
+.startScreen.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.startContent{
+    position:relative;
+    z-index:3;
+}
+
+.startSmall{
+    font-size:11px;
+    letter-spacing:4px;
+    color:#aeb0c5;
+    margin-bottom:18px;
+}
+
+.startTitle{
+    font-family:"DM Serif Display",serif;
+    font-size:clamp(48px,13vw,85px);
+    line-height:1;
+    margin-bottom:20px;
+    background:linear-gradient(
+        120deg,
+        #fff,
+        #ff9dcb,
+        #9faeff
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.startSub{
+    color:#aaaec5;
+    font-size:15px;
+    margin-bottom:38px;
+}
+
+.startBtn{
+    border:none;
+    color:white;
+    padding:15px 34px;
+    border-radius:50px;
+    font-family:Poppins,sans-serif;
+    font-size:14px;
+    letter-spacing:1px;
+    cursor:pointer;
+    background:linear-gradient(
+        110deg,
+        #ff5fa8,
+        #8b7cff,
+        #5caeff
+    );
+    background-size:200%;
+    box-shadow:
+        0 10px 40px rgba(126,104,255,.35);
+    transition:.3s;
+    animation:buttonGlow 3s ease infinite;
+}
+
+.startBtn:active{
+    transform:scale(.94);
+}
+
+@keyframes buttonGlow{
+    0%,100%{background-position:0%;}
+    50%{background-position:100%;}
+}
+
+
+/* ---------- NEXT BUTTON ---------- */
+
+.next{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.07);
+    color:white;
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:10px 21px;
+    font-family:Poppins,sans-serif;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.next:active{
+    transform:translateX(-50%) scale(.94);
+}
+
+
+/* ---------- MUSIC ---------- */
+
+.music{
+    position:absolute;
+    top:22px;
+    right:20px;
+    z-index:30;
+    padding:9px 15px;
+    border-radius:30px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+
+/* ---------- PAGE INDICATOR ---------- */
+
+.counter{
+    position:absolute;
+    top:25px;
+    left:22px;
+    z-index:30;
+    font-size:10px;
+    letter-spacing:2px;
+    color:#85889e;
+}
+
+
+/* ---------- FINAL ---------- */
+
+.signature{
+    margin-top:35px;
+    font-size:13px;
+    letter-spacing:2px;
+    color:#8f91a5;
+}
+
+.heart{
+    display:inline-block;
+    animation:heartbeat 1.6s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+
+    <div class="particles">
+
+        <span class="star" style="left:8%;animation-duration:9s;animation-delay:0s;"></span>
+        <span class="star" style="left:18%;animation-duration:12s;animation-delay:2s;"></span>
+        <span class="dot s1" style="left:30%;animation-duration:10s;animation-delay:1s;"></span>
+        <span class="dot s2" style="left:42%;animation-duration:14s;animation-delay:4s;"></span>
+        <span class="star" style="left:55%;animation-duration:11s;animation-delay:3s;"></span>
+        <span class="dot s3" style="left:68%;animation-duration:13s;animation-delay:1s;"></span>
+        <span class="dot s4" style="left:78%;animation-duration:10s;animation-delay:5s;"></span>
+        <span class="star" style="left:91%;animation-duration:15s;animation-delay:2s;"></span>
+
+    </div>
+</div>
+
+
+<!-- START SCREEN -->
+
+<div class="startScreen" id="startScreen">
+
+    <div class="startContent">
+
+        <div class="startSmall">
+            A LITTLE SOMETHING FOR YOU
+        </div>
+
+        <div class="startTitle">
+            For You ✨
+        </div>
+
+        <div class="startSub">
+            Some things are better said differently.
+        </div>
+
+        <button class="startBtn" onclick="startPresentation()">
+            TAP TO BEGIN ✦
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- SONG -->
+
+<audio id="song" loop>
+    <source src="friendship.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="screen">
+
+    <div class="counter" id="counter">01 / 06</div>
+
+    <div class="music" id="musicBtn" onclick="toggleMusic()">
+        ♫ MUSIC ON
+    </div>
+
+
+    <!-- SLIDE 1 -->
+
+    <section class="slide active">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                Some friendships are different
+            </div>
+
+            <h1>
+                Not everything<br>
+                needs a reason.
+            </h1>
+
+            <div class="line"></div>
+
+            <p class="text">
+                Kabhi-kabhi kisi se baat karna,
+                unki random baatein sunna,
+                ya bas unka apne way mein hona...
+                enough hota hai kisi friendship ko
+                <span class="pink">special</span> banane ke liye.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLIDE 2 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                And then there's you
+            </div>
+
+            <h2>
+                You have your<br>
+                <span class="pink">moods.</span>
+            </h2>
+
+            <p class="text">
+                Kabhi full of energy,
+                kabhi bilkul quiet...
+                aur haan, kabhi-kabhi
+                <span class="yellow">gussa bhi.</span>
+            </p>
+
+            <p class="quote">
+                And honestly,<br>
+                I don't mind that.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLIDE 3 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                Because I know
+            </div>
+
+            <h2>
+                There's more<br>
+                beneath that attitude.
+            </h2>
+
+            <div class="line"></div>
+
+            <p class="text">
+                Gussa kitna bhi ho,
+                mujhe pata hai ki tumhare andar
+                ek <span class="pink">soft aur peaceful heart</span>
+                bhi hai.
+            </p>
+
+            <p class="text" style="margin-top:18px;">
+                Bas har kisi ko woh side
+                dikhana zaroori nahi samajhti.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLIDE 4 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                That's what I appreciate
+            </div>
+
+            <h2>
+                You're not always<br>
+                easy to read.
+            </h2>
+
+            <p class="text">
+                But maybe that's what makes
+                you interesting.
+            </p>
+
+            <p class="quote">
+                "A little fire on the outside,
+                a little calm on the inside."
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLIDE 5 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                One thing I hope
+            </div>
+
+            <h2>
+                Don't lose that<br>
+                <span class="blue">softness.</span>
+            </h2>
+
+            <div class="line"></div>
+
+            <p class="text">
+                Life waise hi kaafi complicated hai.
+                Isliye apne andar jo kindness,
+                care aur softness hai...
+                usse kabhi completely hide mat karna.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLIDE 6 -->
+
+    <section class="slide">
+
+        <div class="content">
+
+            <div class="eyebrow">
+                Just a little reminder
+            </div>
+
+            <h2>
+                Stay exactly<br>
+                <span class="pink">the way you are.</span>
+            </h2>
+
+            <p class="text">
+                Thoda gussa,
+                thodi pagalpan,
+                thodi softness...
+                sab milakar hi toh
+                <span class="yellow">you</span> ho.
+            </p>
+
+            <div class="signature">
+                A friend who notices the little things
+                <span class="heart">♡</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NEXT BUTTON -->
+
+    <button class="next" id="nextBtn" onclick="nextSlide()">
+        NEXT ✦
+    </button>
+
+</div>
+
+
+<script>
+
+const slides = document.querySelectorAll(".slide");
+const song = document.getElementById("song");
+const startScreen = document.getElementById("startScreen");
+const counter = document.getElementById("counter");
+const nextBtn = document.getElementById("nextBtn");
+const musicBtn = document.getElementById("musicBtn");
+
+let current = 0;
+
+
+/* START */
+
+function startPresentation(){
+
+    startScreen.classList.add("hide");
+
+    /*
+       Music starts only after the user's tap,
+       so mobile browsers allow it.
+    */
+
+    song.play().catch(()=>{});
+
+    musicBtn.innerHTML = "♫ MUSIC ON";
+}
+
+
+/* SLIDES */
+
+function showSlide(index){
+
+    if(index >= slides.length){
+
+        // Restart from beginning
+        index = 0;
+    }
+
+    slides.forEach(s => s.classList.remove("active"));
+
+    slides[index].classList.add("active");
+
+    current = index;
+
+    counter.innerHTML =
+        String(current + 1).padStart(2,"0")
+        + " / "
+        + String(slides.length).padStart(2,"0");
+
+    if(current === slides.length - 1){
+        nextBtn.innerHTML = "REPLAY ✦";
+    }else{
+        nextBtn.innerHTML = "NEXT ✦";
+    }
+}
+
+
+function nextSlide(){
+    showSlide(current + 1);
+}
+
+
+/* MUSIC */
+
+function toggleMusic(){
+
+    if(song.paused){
+
+        song.play();
+
+        musicBtn.innerHTML = "♫ MUSIC ON";
+
+    }else{
+
+        song.pause();
+
+        musicBtn.innerHTML = "♫ MUSIC OFF";
+    }
+}
+
+
+/* SWIPE */
+
+let startX = 0;
+
+document.addEventListener("touchstart",function(e){
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend",function(e){
+
+    let endX = e.changedTouches[0].clientX;
+    let difference = startX - endX;
+
+    if(Math.abs(difference) > 60){
+
+        if(difference > 0){
+            nextSlide();
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>
